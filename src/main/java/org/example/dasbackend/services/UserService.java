@@ -1,6 +1,6 @@
 package org.example.dasbackend.services;
 
-import org.example.dasbackend.model.User;
+import org.example.dasbackend.model.userroles.User;
 import org.example.dasbackend.repositories.UserRepository;
 import org.springframework.stereotype.Service;
 

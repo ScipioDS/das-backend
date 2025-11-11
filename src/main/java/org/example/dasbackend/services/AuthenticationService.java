@@ -2,7 +2,7 @@ package org.example.dasbackend.services;
 
 import org.example.dasbackend.dto.LoginUserDto;
 import org.example.dasbackend.dto.RegisterUserDto;
-import org.example.dasbackend.model.User;
+import org.example.dasbackend.model.userroles.User;
 import org.example.dasbackend.repositories.UserRepository;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;

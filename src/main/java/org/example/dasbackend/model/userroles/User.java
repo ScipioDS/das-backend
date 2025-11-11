@@ -1,8 +1,9 @@
-package org.example.dasbackend.model;
+package org.example.dasbackend.model.userroles;
 
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+import org.example.dasbackend.model.crypto.Cryptocurrency;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 import org.springframework.security.core.GrantedAuthority;
@@ -38,6 +39,9 @@ public class User implements UserDetails {
     @UpdateTimestamp
     @Column(name = "updated_at")
     private Date updatedAt;
+
+    @OneToMany(fetch = FetchType.LAZY)
+    private List<Cryptocurrency> savedCryptocurrencies;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

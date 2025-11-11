@@ -1,6 +1,6 @@
 package org.example.dasbackend.repositories;
 
-import org.example.dasbackend.model.User;
+import org.example.dasbackend.model.userroles.User;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
