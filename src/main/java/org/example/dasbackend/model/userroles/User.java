@@ -1,5 +1,6 @@
 package org.example.dasbackend.model.userroles;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -41,6 +42,7 @@ public class User implements UserDetails {
     private Date updatedAt;
 
     @OneToMany(fetch = FetchType.LAZY)
+    @JsonIgnore
     private List<Cryptocurrency> savedCryptocurrencies;
 
     @Override
