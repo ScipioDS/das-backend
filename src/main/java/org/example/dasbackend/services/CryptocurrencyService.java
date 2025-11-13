@@ -1,6 +1,7 @@
 package org.example.dasbackend.services;
 
 import lombok.RequiredArgsConstructor;
+import org.example.dasbackend.dto.filter.CryptoFilter;
 import org.example.dasbackend.model.crypto.Cryptocurrency;
 import org.example.dasbackend.repositories.CryptocurrencyRepository;
 import org.springframework.data.domain.Page;
@@ -18,7 +19,7 @@ public class CryptocurrencyService {
         return cryptocurrencyRepository.findAll();
     }
 
-    public Page<Cryptocurrency> getCryptoPaged(Pageable pageable) {
-        return cryptocurrencyRepository.findAll(pageable);
+    public Page<Cryptocurrency> getCryptoPaged(Pageable pageable, CryptoFilter filter) {
+        return cryptocurrencyRepository.getCryptocurrenciesPaginated(pageable, filter);
     }
 }
