@@ -22,4 +22,12 @@ public class CryptocurrencyService {
     public Page<Cryptocurrency> getCryptoPaged(Pageable pageable, CryptoFilter filter) {
         return cryptocurrencyRepository.getCryptocurrenciesPaginated(pageable, filter);
     }
+
+    public List<Cryptocurrency> getTop10ByPrice() {
+        return cryptocurrencyRepository.getTop10ByPrice();
+    }
+
+    public Cryptocurrency findTopByPriceDesc() {
+        return cryptocurrencyRepository.findTopByOrderByPriceDesc();
+    }
 }

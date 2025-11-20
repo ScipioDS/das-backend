@@ -27,4 +27,14 @@ public class CryptocurrencyController {
     public Page<Cryptocurrency> getCryptocurrenciesPaginated(@PathVariable int page, @PathVariable int size, @RequestBody CryptoFilter filter) {
         return cryptocurrencyService.getCryptoPaged(PageRequest.of(page,size), filter);
     }
+
+    @GetMapping("/top10")
+    public List<Cryptocurrency> getTop10CryptocurrenciesByPrice() {
+        return cryptocurrencyService.getTop10ByPrice();
+    }
+
+    @GetMapping("/top")
+    public Cryptocurrency getTopCryptocurrenciesByPrice() {
+        return cryptocurrencyService.findTopByPriceDesc();
+    }
 }

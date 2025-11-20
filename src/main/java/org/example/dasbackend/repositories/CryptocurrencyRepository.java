@@ -17,5 +17,8 @@ public interface CryptocurrencyRepository extends JpaRepository<Cryptocurrency, 
             "OR (:#{#filter.ticker} IS NULL OR LOWER(c.ticker) LIKE LOWER(CONCAT('%', :#{#filter.ticker}, '%')))")
     public Page<Cryptocurrency> getCryptocurrenciesPaginated(Pageable pageable, CryptoFilter filter);
 
-//    public List<Cryptocurrency> findTopByOrderByPriceDesc();
+    @Query("SELECT c FROM Cryptocurrency c ORDER BY c.price DESC LIMIT 10")
+    public List<Cryptocurrency> getTop10ByPrice();
+
+    public Cryptocurrency findTopByOrderByPriceDesc();
 }
