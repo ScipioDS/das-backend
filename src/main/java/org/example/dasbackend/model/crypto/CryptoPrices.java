@@ -4,13 +4,15 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
 import java.time.OffsetDateTime;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-public class Cryptocurrency {
+@Table(name = "crypto_prices")
+public class CryptoPrices {
     @Id()
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(unique = true, nullable = false)
@@ -19,9 +21,12 @@ public class Cryptocurrency {
     @Column(nullable = false)
     private String ticker;
 
-    private String name;
+    private OffsetDateTime date;
 
-    private Float price;
+    private Float high;
 
-    private OffsetDateTime lastUpdated;
+    private Float low;
+
+    private Float close;
+
 }

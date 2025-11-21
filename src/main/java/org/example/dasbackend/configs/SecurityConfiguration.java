@@ -36,6 +36,7 @@ public class SecurityConfiguration {
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/auth/**").permitAll()
                         .requestMatchers("/crypto/**").permitAll()
+                        .requestMatchers("/crypto-price/**").permitAll()
                         .anyRequest().authenticated()
                 )
                 .sessionManagement(session -> session
