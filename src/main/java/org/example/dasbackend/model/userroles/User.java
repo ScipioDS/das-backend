@@ -41,10 +41,6 @@ public class User implements UserDetails {
     @Column(name = "updated_at")
     private Date updatedAt;
 
-    @OneToMany(fetch = FetchType.LAZY)
-    @JsonIgnore
-    private List<Cryptocurrency> savedCryptocurrencies;
-
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return List.of();

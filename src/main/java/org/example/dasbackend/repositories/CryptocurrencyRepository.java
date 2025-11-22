@@ -21,4 +21,8 @@ public interface CryptocurrencyRepository extends JpaRepository<Cryptocurrency, 
     public List<Cryptocurrency> getTop10ByPrice();
 
     public Cryptocurrency findTopByOrderByPriceDesc();
+
+    public Cryptocurrency findById(Long id);
+
+    public Cryptocurrency findByTicker(String ticker);
 }

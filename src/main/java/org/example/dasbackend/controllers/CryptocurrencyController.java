@@ -3,6 +3,9 @@ package org.example.dasbackend.controllers;
 import lombok.RequiredArgsConstructor;
 import org.example.dasbackend.dto.filter.CryptoFilter;
 import org.example.dasbackend.model.crypto.Cryptocurrency;
+import org.example.dasbackend.model.userroles.User;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.example.dasbackend.services.CryptocurrencyService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -36,5 +39,37 @@ public class CryptocurrencyController {
     @GetMapping("/top")
     public Cryptocurrency getTopCryptocurrenciesByPrice() {
         return cryptocurrencyService.findTopByPriceDesc();
+    }
+
+    @GetMapping("/{ticker}")
+    public Cryptocurrency getCryptocurrenciesByTicker(@PathVariable String ticker) {
+        return cryptocurrencyService.findByTicker(ticker);
+    }
+
+    @PreAuthorize("isAuthenticated()")
+    @GetMapping("/save/{cryptoId}")
+    public Cryptocurrency saveCryptocurrency(@PathVariable Long cryptoId) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        User currentUser = (User) authentication.getPrincipal();
+
+        return cryptocurrencyService.saveCryptocurrencyToUser(cryptoId, currentUser);
+    }
+
+    @PreAuthorize("isAuthenticated()")
+    @GetMapping("/unsave/{cryptoId}")
+    public void removeSavedCryptocurrency(@PathVariable Long cryptoId) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        User currentUser = (User) authentication.getPrincipal();
+
+        cryptocurrencyService.removeCryptoFromUser(cryptoId, currentUser);
+    }
+
+    @PreAuthorize("isAuthenticated()")
+    @GetMapping("/saved")
+    public List<Cryptocurrency> getSavedCryptocurrency() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        User currentUser = (User) authentication.getPrincipal();
+
+        return cryptocurrencyService.getSaved(currentUser);
     }
 }

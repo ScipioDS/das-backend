@@ -14,7 +14,7 @@ public class Cryptocurrency {
     @Id()
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(unique = true, nullable = false)
-    private Integer id;
+    private Long id;
 
     @Column(nullable = false)
     private String ticker;
