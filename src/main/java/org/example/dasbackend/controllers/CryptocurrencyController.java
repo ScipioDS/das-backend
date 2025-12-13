@@ -2,6 +2,7 @@ package org.example.dasbackend.controllers;
 
 import lombok.RequiredArgsConstructor;
 import org.example.dasbackend.dto.filter.CryptoFilter;
+import org.example.dasbackend.dto.helper.CryptocurrencyCreationHelper;
 import org.example.dasbackend.model.crypto.Cryptocurrency;
 import org.example.dasbackend.model.userroles.User;
 import org.springframework.security.core.Authentication;
@@ -71,5 +72,18 @@ public class CryptocurrencyController {
         User currentUser = (User) authentication.getPrincipal();
 
         return cryptocurrencyService.getSaved(currentUser);
+    }
+
+    @PreAuthorize("isAuthenticated()")
+    @PostMapping("/create")
+    public Cryptocurrency createCryptocurrency(@RequestBody CryptocurrencyCreationHelper helper) {
+        return cryptocurrencyService.createCryptocurrency(helper);
+    }
+
+    @PreAuthorize("isAuthenticated()")
+    @PostMapping("/update/{cryptoId}")
+    public Cryptocurrency createCryptocurrency(@RequestBody CryptocurrencyCreationHelper helper,
+                                               @PathVariable Long cryptoId) {
+        return cryptocurrencyService.updateCryptocurrency(helper, cryptoId);
     }
 }
