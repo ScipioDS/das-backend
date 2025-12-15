@@ -82,7 +82,7 @@ public class CryptocurrencyController {
 
     @PreAuthorize("isAuthenticated()")
     @PostMapping("/update/{cryptoId}")
-    public Cryptocurrency createCryptocurrency(@RequestBody CryptocurrencyCreationHelper helper,
+    public Cryptocurrency updateCryptocurrency(@RequestBody CryptocurrencyCreationHelper helper,
                                                @PathVariable Long cryptoId) {
         return cryptocurrencyService.updateCryptocurrency(helper, cryptoId);
     }
