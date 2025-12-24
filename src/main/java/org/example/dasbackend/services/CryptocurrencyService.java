@@ -2,6 +2,7 @@ package org.example.dasbackend.services;
 
 import lombok.RequiredArgsConstructor;
 import org.example.dasbackend.dto.filter.CryptoFilter;
+import org.example.dasbackend.dto.helper.CryptocurrencyCreationHelper;
 import org.example.dasbackend.model.crypto.Cryptocurrency;
 import org.example.dasbackend.model.userroles.User;
 import org.example.dasbackend.model.userroles.UserSavedCryptocurrency;
@@ -76,5 +77,27 @@ public class CryptocurrencyService {
         UserSavedCryptocurrency saved = usersSavedCryptocurrenciesRepository
                 .findByUserIdAndCryptocurrencyId(Long.valueOf(currentUser.getId()), cryptoId);
         usersSavedCryptocurrenciesRepository.delete(saved);
+    }
+
+    public Cryptocurrency createCryptocurrency(CryptocurrencyCreationHelper helper) {
+        Cryptocurrency cryptocurrency = new Cryptocurrency();
+        return save(helper, cryptocurrency);
+    }
+
+    public Cryptocurrency updateCryptocurrency(CryptocurrencyCreationHelper helper, Long id) {
+        Cryptocurrency cryptocurrency = findById(id);
+        if (cryptocurrency == null) {
+            throw new IllegalArgumentException("Cryptocurrency with the given ID does not exist");
+        }
+        return save(helper, cryptocurrency);
+    }
+
+    private Cryptocurrency save(CryptocurrencyCreationHelper helper, Cryptocurrency cryptocurrency) {
+        if (helper.getName() != null && !helper.getName().isEmpty()) {
+            cryptocurrency.setName(helper.getName());
+        }
+        cryptocurrency.setTicker(helper.getTicker());
+        cryptocurrency.setPrice(helper.getPrice());
+        return cryptocurrencyRepository.save(cryptocurrency);
     }
 }
