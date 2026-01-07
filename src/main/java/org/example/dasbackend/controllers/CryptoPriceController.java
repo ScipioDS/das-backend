@@ -2,7 +2,7 @@ package org.example.dasbackend.controllers;
 
 import lombok.RequiredArgsConstructor;
 import org.example.dasbackend.model.crypto.CryptoPrices;
-import org.example.dasbackend.services.CryptoPriceService;
+import org.example.dasbackend.services.interfaces.CryptoPriceService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;

@@ -2,7 +2,7 @@ package org.example.dasbackend.controllers;
 
 import lombok.extern.slf4j.Slf4j;
 import org.example.dasbackend.dto.predicitons.*;
-import org.example.dasbackend.services.PredictionService;
+import org.example.dasbackend.services.interfaces.PredictionService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Mono;

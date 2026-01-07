@@ -1,4 +1,4 @@
-package org.example.dasbackend.services;
+package org.example.dasbackend.services.impl;
 
 import org.example.dasbackend.dto.LoginUserDto;
 import org.example.dasbackend.dto.RegisterUserDto;
@@ -6,19 +6,20 @@ import org.example.dasbackend.model.userroles.Role;
 import org.example.dasbackend.model.userroles.User;
 import org.example.dasbackend.repositories.RoleRepository;
 import org.example.dasbackend.repositories.UserRepository;
+import org.example.dasbackend.services.interfaces.AuthenticationService;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
-public class AuthenticationService {
+public class AuthenticationServiceImpl implements AuthenticationService {
     private final UserRepository userRepository;
     private final RoleRepository roleRepository;
     private final PasswordEncoder passwordEncoder;
     private final AuthenticationManager authenticationManager;
 
-    public AuthenticationService(
+    public AuthenticationServiceImpl(
             UserRepository userRepository,
             RoleRepository roleRepository,
             AuthenticationManager authenticationManager,
@@ -30,6 +31,7 @@ public class AuthenticationService {
         this.passwordEncoder = passwordEncoder;
     }
 
+    @Override
     public User signup(RegisterUserDto input) {
         Role userRole = roleRepository.findByName("USER")
                 .orElseThrow(() -> new RuntimeException("Default USER role not found"));
@@ -43,6 +45,7 @@ public class AuthenticationService {
         return userRepository.save(user);
     }
 
+    @Override
     public User authenticate(LoginUserDto input) {
         authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(

@@ -1,0 +1,10 @@
+# das-backend/.dockerignore
+target/
+.mvn/
+mvnw
+mvnw.cmd
+*.log
+.git
+.gitignore
+.env
+*.md

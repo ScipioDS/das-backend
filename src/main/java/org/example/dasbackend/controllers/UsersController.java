@@ -1,7 +1,7 @@
 package org.example.dasbackend.controllers;
 
 import org.example.dasbackend.model.userroles.User;
-import org.example.dasbackend.services.UserService;
+import org.example.dasbackend.services.interfaces.UserService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
